@@ -23,6 +23,9 @@
 #define DETECTA4 1
 #define SECDETECT 2
 
+#define STATE_OK 0
+#define FINDLINEERR -1
+
 class Detector
 {
 private:
@@ -97,7 +100,7 @@ private:
     Serial* serial_;
 
 protected:
-    void findLabel(cv::Mat image_gray, cv::Mat &match_templ, std::vector<cv::Point2f> & points);
+    int findLabel(cv::Mat image_gray, cv::Mat &match_templ, std::vector<cv::Point2f> & points);
     cv::Mat getLabelImg(Mat img);
     void getROI(cv::Mat image, cv::Mat &dst);
     cv::Mat LOG(Mat img);
@@ -143,8 +146,8 @@ public:
     int setOriginImg(string filename);
     int setOriginImg(Mat img);
     void setDesiredSize(cv::Point2i desired_size);
-    void setImg(string filename);
-    void setImg(Mat img);
+    int setImg(string filename);
+    int setImg(Mat img);
     void setCameraPtr(Camera* camera);
     void setSerialPtr(Serial* serial);
     void setThresh();
